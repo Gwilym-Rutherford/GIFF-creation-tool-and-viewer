@@ -19,6 +19,7 @@ save.addEventListener("click", ()=>{
 let isMouseDown = false;
 canvasL1.addEventListener("mousedown", ()=>{
     isMouseDown = true;
+    contextL1.beginPath();
 });
 
 document.body.addEventListener("mouseup", ()=>{
