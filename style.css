@@ -20,4 +20,10 @@ canvas{
     position: relative;
 }
 
+.colours{
+    display: flex;
+    flex-direction: column;
+}
+
+
 

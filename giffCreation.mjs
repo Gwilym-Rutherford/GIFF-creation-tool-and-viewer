@@ -2,7 +2,6 @@ let canvasCreation = document.getElementById("createCanvas")
 let save = document.getElementById("save");
 let canvasL1 = document.getElementById("canvasL1");
 let contextL1 = canvasL1.getContext("2d");
-contextL1.fillStyle='black';
 
 let pixelPoints = [];
 
@@ -19,6 +18,9 @@ save.addEventListener("click", ()=>{
 let isMouseDown = false;
 canvasL1.addEventListener("mousedown", ()=>{
     isMouseDown = true;
+
+    let selectedColour = getSelectedRadioButtonValue(document.getElementsByName("colourOption"));
+    contextL1.strokeStyle = selectedColour;
     contextL1.beginPath();
 });
 
@@ -30,6 +32,7 @@ document.body.addEventListener("mouseup", ()=>{
 canvasL1.addEventListener("mousemove", (MouseEvent)=>{
     let position = canvasL1.getBoundingClientRect();
     let weight = document.getElementById("weight").value;
+    
     contextL1.lineWidth = weight;
     
     let x = MouseEvent.clientX - position.left;
@@ -51,3 +54,11 @@ canvasL1.addEventListener("mousemove", (MouseEvent)=>{
     }
 
 });
+
+function getSelectedRadioButtonValue(element){
+    for(let i = 0; i < element.length; i++){
+        if(element[i].checked){
+            return element[i].value;
+        }
+    }
+}
