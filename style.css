@@ -1,0 +1,23 @@
+body{
+    text-align: center;
+}
+
+canvas{
+    margin: 10px;
+    border: 2px black solid;
+    border-radius: 2px;
+}
+
+.createCanvasFormWrapper{
+    display: flex;
+}
+
+.createCanvasForm{
+    margin:0 auto;
+}
+
+.canvasWrapper{
+    position: relative;
+}
+
+
