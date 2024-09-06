@@ -1,4 +1,4 @@
-import { saveFormat } from "./createGIFF.mjs";
+import { saveFormat } from "./createGIFF.js";
 
 let canvasCreation = document.getElementById("createCanvas")
 let save = document.getElementById("save");
