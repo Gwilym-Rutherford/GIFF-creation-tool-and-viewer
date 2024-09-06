@@ -1,3 +1,5 @@
+import { saveFormat } from "./createGIFF.mjs";
+
 let canvasCreation = document.getElementById("createCanvas")
 let save = document.getElementById("save");
 let canvasL1 = document.getElementById("canvasL1");
@@ -11,8 +13,8 @@ canvasCreation.addEventListener("click", ()=>{
 });
 
 save.addEventListener("click", ()=>{
-    let imageData = contextL1.createImageData(canvasL1.width, canvasL1.height);
-    console.log(imageData[50 * (imageData.width * 4) + 200 * 4 + 2]);
+    let imageData = contextL1.getImageData(0, 0, canvasL1.width, canvasL1.height);
+    saveFormat(imageData);
 });
 
 let isMouseDown = false;
@@ -30,11 +32,10 @@ document.body.addEventListener("mouseup", ()=>{
 });
 
 canvasL1.addEventListener("mousemove", (MouseEvent)=>{
-    let position = canvasL1.getBoundingClientRect();
     let weight = document.getElementById("weight").value;
-    
     contextL1.lineWidth = weight;
     
+    let position = canvasL1.getBoundingClientRect();
     let x = MouseEvent.clientX - position.left;
     let y = MouseEvent.clientY - position.top;
 
