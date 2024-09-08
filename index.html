@@ -18,38 +18,33 @@
         </div>
     </div>
     <h2>options</h2>
-    <div id="options">
-        <label for="radius">Width: </label>
-        <input type="range" min="1" max="50" value="10" id="weight">
-        <div class="colours">
-            <div>
-                <label for="black">Black: </label>
-                <input type="radio" id="colour" name="colourOption" value="black">
-            </div>
-
-            <div>
-                <label for="white">White: </label>
-                <input type="radio" id="colour" name="colourOption" value="white">
-            </div>
-
-            <div>
-                <label for="red">Red: </label>
-                <input type="radio" id="colour" name="colourOption" value="red">
-            </div>
-
-            <div>
-                <label for="green">Green: </label>
-                <input type="radio" id="colour" name="colourOption" value="green">
-            </div>
-
-            <div>
-                <label for="blue">Blue: </label>
-                <input type="radio" id="colour" name="colourOption" value="blue">
-            </div>
+    <div class="options">
+        <div class="slider">
+            <label for="weight">Width: </label>
+            <input type="range" min="1" max="50" value="10" id="weight">
+            <label id="weightValue">10px</label>
         </div>
-    </div>
 
-    <canvas id="canvasL1" class="canvasL1"></canvas>
+        <div class="slider">
+            <label for="red">Red: </label>
+            <input type="range" min="1" max="255" value="100" id="red">
+            <label id="redValue">100px</label>
+        </div>
+            
+        <div class="slider">
+            <label for="green">Green: </label>
+            <input type="range" min="1" max="255" value="100" id="green">
+            <label id="greenValue">100px</label>
+        </div>
+            
+        <div class="slider">
+            <label for="blue">Blue: </label>
+            <input type="range" min="1" max="255" value="100" id="blue">
+            <label id="blueValue">100px</label>
+        </div>
+        <canvas id="previewColour" width="50" height="50"></canvas>
+    </div>
+    <canvas id="canvasL1" width="500" height="500"></canvas>
 
     <script type="module" src="giffCreation.js"></script>
 </body>

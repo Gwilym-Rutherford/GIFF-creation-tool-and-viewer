@@ -1,15 +1,28 @@
 import { saveFormat } from "./createGIFF.js";
 
-let canvasCreation = document.getElementById("createCanvas")
+const canvasCreation = document.getElementById("createCanvas")
+const canvasL1 = document.getElementById("canvasL1");
+const contextL1 = canvasL1.getContext("2d");
+
+const previewCanvas = document.getElementById("previewColour");
+const contextPreview = previewCanvas.getContext("2d");
+
+
+
 let save = document.getElementById("save");
-let canvasL1 = document.getElementById("canvasL1");
-let contextL1 = canvasL1.getContext("2d");
+let weightSlider = document.getElementById("weight");
+let redSlider = document.getElementById("red");
+let greenSlider = document.getElementById("green");
+let blueSlider = document.getElementById("blue");
 
-let pixelPoints = [];
 
-canvasCreation.addEventListener("click", ()=>{ 
-    canvasL1.width = document.getElementById("width").value;
-    canvasL1.height = document.getElementById("height").value;
+document.body.addEventListener("mousemove", ()=>{
+    document.getElementById("weightValue").innerText = weightSlider.value;
+    document.getElementById("redValue").innerText = redSlider.value + "px";
+    document.getElementById("greenValue").innerText = greenSlider.value + "px";
+    document.getElementById("blueValue").innerText = blueSlider.value + "px";
+    contextPreview.fillStyle = `rgb(${redSlider.value} ${greenSlider.value} ${blueSlider.value})`;
+    contextPreview.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
 });
 
 save.addEventListener("click", ()=>{
@@ -17,12 +30,17 @@ save.addEventListener("click", ()=>{
     saveFormat(imageData);
 });
 
+let pixelPoints = [];
+canvasCreation.addEventListener("click", ()=>{ 
+    canvasL1.width = document.getElementById("width").value;
+    canvasL1.height = document.getElementById("height").value;
+});
+
+
 let isMouseDown = false;
 canvasL1.addEventListener("mousedown", ()=>{
     isMouseDown = true;
-
-    let selectedColour = getSelectedRadioButtonValue(document.getElementsByName("colourOption"));
-    contextL1.strokeStyle = selectedColour;
+    contextL1.strokeStyle = `rgb(${redSlider.value} ${greenSlider.value} ${blueSlider.value})`;
     contextL1.beginPath();
 });
 
@@ -55,11 +73,3 @@ canvasL1.addEventListener("mousemove", (MouseEvent)=>{
     }
 
 });
-
-function getSelectedRadioButtonValue(element){
-    for(let i = 0; i < element.length; i++){
-        if(element[i].checked){
-            return element[i].value;
-        }
-    }
-}

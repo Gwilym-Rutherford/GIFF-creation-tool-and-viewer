@@ -20,9 +20,15 @@ canvas{
     position: relative;
 }
 
-.colours{
+
+.options{
+    width: 25%;
+    margin: 0 auto;
+}
+
+.slider{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 
