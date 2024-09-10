@@ -7,20 +7,18 @@ const contextL1 = canvasL1.getContext("2d");
 const previewCanvas = document.getElementById("previewColour");
 const contextPreview = previewCanvas.getContext("2d");
 
-
-
-let save = document.getElementById("save");
-let weightSlider = document.getElementById("weight");
-let redSlider = document.getElementById("red");
-let greenSlider = document.getElementById("green");
-let blueSlider = document.getElementById("blue");
+const save = document.getElementById("save");
+const weightSlider = document.getElementById("weight");
+const redSlider = document.getElementById("red");
+const greenSlider = document.getElementById("green");
+const blueSlider = document.getElementById("blue");
 
 
 document.body.addEventListener("mousemove", ()=>{
     document.getElementById("weightValue").innerText = weightSlider.value;
-    document.getElementById("redValue").innerText = redSlider.value + "px";
-    document.getElementById("greenValue").innerText = greenSlider.value + "px";
-    document.getElementById("blueValue").innerText = blueSlider.value + "px";
+    document.getElementById("redValue").innerText = redSlider.value;
+    document.getElementById("greenValue").innerText = greenSlider.value;
+    document.getElementById("blueValue").innerText = blueSlider.value;
     contextPreview.fillStyle = `rgb(${redSlider.value} ${greenSlider.value} ${blueSlider.value})`;
     contextPreview.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
 });
