@@ -3,6 +3,7 @@ import { saveFormat } from "./createGIFF.js";
 const canvasCreation = document.getElementById("createCanvas")
 const canvasL1 = document.getElementById("canvasL1");
 const contextL1 = canvasL1.getContext("2d");
+setBackgroundColour("white");
 
 const previewCanvas = document.getElementById("previewColour");
 const contextPreview = previewCanvas.getContext("2d");
@@ -13,14 +14,20 @@ const redSlider = document.getElementById("red");
 const greenSlider = document.getElementById("green");
 const blueSlider = document.getElementById("blue");
 
+const backgroundColour = document.getElementById("backgroundColour");
+
 
 document.body.addEventListener("mousemove", ()=>{
-    document.getElementById("weightValue").innerText = weightSlider.value;
+    document.getElementById("weightValue").innerText = weightSlider.value + "px";
     document.getElementById("redValue").innerText = redSlider.value;
     document.getElementById("greenValue").innerText = greenSlider.value;
     document.getElementById("blueValue").innerText = blueSlider.value;
     contextPreview.fillStyle = `rgb(${redSlider.value} ${greenSlider.value} ${blueSlider.value})`;
     contextPreview.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
+});
+
+backgroundColour.addEventListener("click", ()=>{
+    setBackgroundColour(`rgb(${redSlider.value} ${greenSlider.value} ${blueSlider.value})`);
 });
 
 save.addEventListener("click", ()=>{
@@ -32,8 +39,8 @@ let pixelPoints = [];
 canvasCreation.addEventListener("click", ()=>{ 
     canvasL1.width = document.getElementById("width").value;
     canvasL1.height = document.getElementById("height").value;
+    setBackgroundColour("white");
 });
-
 
 let isMouseDown = false;
 canvasL1.addEventListener("mousedown", ()=>{
@@ -71,3 +78,8 @@ canvasL1.addEventListener("mousemove", (MouseEvent)=>{
     }
 
 });
+
+function setBackgroundColour(colour){
+    contextL1.fillStyle = colour;
+    contextL1.fillRect(0, 0, canvasL1.width, canvasL1.height);
+}

@@ -1,7 +1,6 @@
 import { giffFileStructure } from "./giffFileStructure.js";
 
 const FIXED_HEADER_SIZE = 14;
-const NUM_OF_PROPERTIES = 6;
 
 export function saveFormat(imageData){
     writeHeaders(imageData);
@@ -40,8 +39,7 @@ function getHeaders(){
     let headersInt = new DataView(headersByteArray);
     
     headers.forEach((value, index)=>{
-        headersInt.setUint32(index * 4, value, false)
-        console.log(headersInt[index]);
+        headersInt.setUint32(index * 4, value, false);
     });
     
     return headersInt;
