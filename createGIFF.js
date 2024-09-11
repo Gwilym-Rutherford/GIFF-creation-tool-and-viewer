@@ -1,6 +1,6 @@
 import { giffFileStructure } from "./giffFileStructure.js";
 
-const FIXED_HEADER_SIZE = 14;
+const FIXED_HEADER_SIZE = 22;
 
 export function saveFormat(imageData){
     writeHeaders(imageData);
