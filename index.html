@@ -8,7 +8,7 @@
 </head>
 <body>  
     <h1>.giff Creation tool</h1>
-    <h2>Create Canvas</h2>
+    <h2>Create Canvas (width x height)</h2>
     <div class="createCanvasFormWrapper">
         <div class="createCanvasForm">
             <input type="number" id="width" placeholder="width" value="500">
@@ -16,6 +16,10 @@
             <input type="button" id="createCanvas" value="Create Canvas/Reset">
             <input type="button" id="save" value="save">
         </div>
+    </div>
+    <h2>Load image</h2>
+    <div>
+        <input type="file" id="fileInput" accept=".giff">
     </div>
     <h2>options</h2>
     <div class="options">
@@ -57,5 +61,6 @@
     </footer>
 
     <script type="module" src="imageCreation.js"></script>
+    <script type="module" src="imageLoader.js"></script>
 </body>
 </html>

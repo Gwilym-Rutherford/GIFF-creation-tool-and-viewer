@@ -1,8 +1,8 @@
 import { saveFormat } from "./createGIFF.js";
 
 const canvasCreation = document.getElementById("createCanvas")
-const canvasL1 = document.getElementById("canvasL1");
-const contextL1 = canvasL1.getContext("2d");
+export const canvasL1 = document.getElementById("canvasL1");
+export const contextL1 = canvasL1.getContext("2d");
 setBackgroundColour("white");
 
 const previewCanvas = document.getElementById("previewColour");
