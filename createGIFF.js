@@ -2,11 +2,11 @@ import { giffFileStructure } from "./giffFileStructure.js";
 
 const FIXED_HEADER_SIZE = 22;
 
-export function saveFormat(imageData){
-    writeHeaders(imageData);
-    let pixelData = writeImageData(imageData);
-    let signature = getSignature();
-    let headers = getHeaders();
+export async function saveFormat(imageData){
+    await writeHeaders(imageData);
+    let pixelData = await writeImageData(imageData);
+    let signature = await getSignature();
+    let headers = await getHeaders();
     
     let blob = new Blob([signature, headers, pixelData], { type: "application/octet-stream" });
     downloadFile(URL.createObjectURL(blob));
@@ -15,7 +15,6 @@ export function saveFormat(imageData){
 function writeHeaders(imageData){
     giffFileStructure.Signature.data = "GR";
     giffFileStructure.FileSize.data = imageData.data.length + FIXED_HEADER_SIZE;
-    giffFileStructure.Compression.data = 1;
     giffFileStructure.Mode.data = 1;
     giffFileStructure.Width.data = imageData.width;
     giffFileStructure.Height.data = imageData.height;
@@ -45,10 +44,28 @@ function getHeaders(){
     return headersInt;
 }
 
-function writeImageData(imageData){
+async function writeImageData(imageData){
+    let compression = await getCompressionType();
+    giffFileStructure.Compression.data = compression.code;
+    
+    switch (compression.key) {
+        case "RLE":
+            return storeRLE(imageData);
+
+        case "raw":
+            return storeRaw(imageData);
+        }    
+        
+}
+
+function storeRLE(imageData){
+    //TODO
+}
+
+function storeRaw(imageData){
     let pixelData = new ArrayBuffer(imageData.data.length);
-    let pixelDataViwer = new Uint8Array(pixelData);
-    pixelDataViwer.set(imageData.data);
+    let pixelDataViewer = new Uint8Array(pixelData);
+    pixelDataViewer.set(imageData.data);
     return pixelData;
 }
 
@@ -60,4 +77,16 @@ function downloadFile(blobURL){
     temp.click();
     URL.revokeObjectURL(blobURL);
     document.body.removeChild(temp);
+}
+
+function getCompressionType(){
+    return new Promise((res)=>{
+        let keys = document.getElementsByName("compressionType");
+        keys.forEach((keys, index)=>{
+            if(keys.checked == true){
+                res({key: keys.value, code: index + 1});
+            }
+        });
+    });
+    
 }

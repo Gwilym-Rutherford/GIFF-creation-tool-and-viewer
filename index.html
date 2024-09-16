@@ -21,7 +21,7 @@
     <div>
         <input type="file" id="fileInput" accept=".giff">
     </div>
-    <h2>options</h2>
+    <h2>Canvas Options</h2>
     <div class="options">
         <div class="slider">
             <label for="weight">Width: </label>
@@ -46,11 +46,22 @@
             <input type="range" min="1" max="255" value="100" id="blue">
             <label id="blueValue">100px</label>
         </div>
-        <div class="checkbox">
+        <div>
             <label for="backgroundColour">Set Background Colour*: </label>
             <input type="button" id="backgroundColour" value="set">
         </div>
         <canvas id="previewColour" width="50" height="50"></canvas>
+        <h2>Compression Options</h2>
+            <div class="compression">
+                <div>
+                    <input type="radio" id="raw" name="compressionType" value="raw">
+                    <label for="raw">Raw</label>
+                </div>
+                <div>
+                    <input type="radio" id="RLE" name="compressionType" value="RLE">
+                    <label for="RLE">Run length encoding</label>
+                </div>
+            </div>
     </div>
     <canvas id="canvasL1" width="500" height="500"></canvas>
 

@@ -31,5 +31,10 @@ canvas{
     justify-content: center;
 }
 
+.compression{
+    display: flex;
+    flex-direction: column;
+}
+
 
 

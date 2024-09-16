@@ -36,14 +36,8 @@ fileInput.addEventListener("change", (event)=>{
 
                 contextL1.fillRect(index % width, rowOffset, 1, 1);
             });
-            
-
-
-            
         });
     }; 
-    
-
 });
 
 
