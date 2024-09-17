@@ -59,7 +59,35 @@ async function writeImageData(imageData){
 }
 
 function storeRLE(imageData){
-    //TODO
+    let splitIntoRGBA = []
+    for (let i = 0; i < imageData.data.length; i+=4 ) {
+        splitIntoRGBA.push(imageData.data.slice(i, i+4));
+    }
+
+    let counter = 0;
+    let currColour;
+    let RLEArr = [];
+    for(let i = 0; i < splitIntoRGBA.length; i++){
+        if(counter == 0){
+            currColour = splitIntoRGBA[i];
+        }
+
+        if(compareArrays(currColour, splitIntoRGBA[i+1])){
+            counter++;
+        }else{
+            RLEArr.push(counter + 1);
+            RLEArr.push(...splitIntoRGBA[i]);
+            counter = 0;
+        }
+    }
+    addPadding(RLEArr, (4 - (RLEArr.length % 4)));
+
+    let pixelData = new ArrayBuffer(RLEArr.length * 4);
+    let pixelDataViewer = new Uint32Array(pixelData);
+
+    pixelDataViewer.set(RLEArr);
+    return pixelData;
+
 }
 
 function storeRaw(imageData){
@@ -87,6 +115,22 @@ function getCompressionType(){
                 res({key: keys.value, code: index + 1});
             }
         });
-    });
-    
+    });   
+}
+
+function compareArrays(arr1, arr2){
+    if(typeof arr2 == "undefined"){
+        return false;
+    }
+
+    if(arr1.join("").toString() == arr2.join("").toString()){
+        return true;
+    }
+    return false;
+}
+
+function addPadding(arr, n){
+    for(let i = 0; i < n; i++){
+        arr.push(0);
+    }
 }
