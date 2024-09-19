@@ -1,0 +1,3 @@
+class GiffDecompress extends Giff{
+    
+}

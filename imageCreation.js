@@ -1,4 +1,5 @@
-import { saveFormat } from "./createGIFF.js";
+import { GiffSave } from "./giffSave.js";
+import { GiffLoad } from "./GiffLoad.js";
 
 const canvasCreation = document.getElementById("createCanvas")
 export const canvasL1 = document.getElementById("canvasL1");
@@ -16,6 +17,11 @@ const blueSlider = document.getElementById("blue");
 
 const backgroundColour = document.getElementById("backgroundColour");
 
+let fileInput = document.getElementById("fileInput");
+fileInput.addEventListener("change", (event)=>{
+    let giffLoad = new GiffLoad();
+    giffLoad.load(event);
+});
 
 document.body.addEventListener("mousemove", ()=>{
     document.getElementById("weightValue").innerText = weightSlider.value + "px";
@@ -31,8 +37,9 @@ backgroundColour.addEventListener("click", ()=>{
 });
 
 save.addEventListener("click", ()=>{
+    let giffSave = new GiffSave();
     let imageData = contextL1.getImageData(0, 0, canvasL1.width, canvasL1.height);
-    saveFormat(imageData);
+    giffSave.saveFormat(imageData);
 });
 
 let pixelPoints = [];
