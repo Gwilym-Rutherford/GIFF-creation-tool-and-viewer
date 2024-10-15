@@ -1,4 +1,5 @@
 import { Giff } from "./Giff.js";
+import { GiffDecompress } from "./GiffDecompress.js";
 import { canvasL1, contextL1 } from "./imageCreation.js";
 
 export class GiffLoad extends Giff{
@@ -25,24 +26,18 @@ export class GiffLoad extends Giff{
             canvasL1.height = height
 
                 switch (parseInt(Giff.giffFileStructure.Compression.data)) {
+                    // raw
                     case 1:
-                        this.drawToCanvas(this.getRawPixelData(this.hexString), width);
+                        this.drawToCanvas(Giff.getRawPixelData(this.hexString), width);
                         break;
+                    // rle
                     case 2:
-                        this.drawToCanvas(this.getRLEPixelData(this.hexString), width);
+                        let decompress = new GiffDecompress()
+                        this.drawToCanvas(decompress.getRLEPixelData(this.hexString), width);
                         break;
                 }
             });
         });
-    }
-
-    getRawPixelData(hexString){
-        return this.getPixelData(hexString).match(/.{1,8}/g);
-    }
-
-    getRLEPixelData(hexString){
-        let pixelData = this.getPixelData(hexString);
-        
     }
 
     drawToCanvas(pixelData, width){
@@ -55,10 +50,6 @@ export class GiffLoad extends Giff{
     
             contextL1.fillRect(index % width, rowOffset, 1, 1);
         });
-    }
-
-    getPixelData(hexData){
-        return hexData.substring(Giff.FIXED_HEADER_SIZE * 2);
     }
 
     getHeaders(hexData, callback){

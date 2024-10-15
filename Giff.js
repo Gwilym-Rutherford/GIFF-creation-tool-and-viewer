@@ -42,4 +42,16 @@ export class Giff{
         return headersInt;
     }
 
+    static getPixelData(hexData){
+        return hexData.substring(Giff.FIXED_HEADER_SIZE * 2);
+    }
+
+    static getRawPixelData(hexString){
+        return this.getPixelData(hexString).match(/.{1,8}/g);
+    }
+
+    staticgetRLEPixelData(hexString){
+        return this.getPixelData(hexString);
+    }
+
 }
