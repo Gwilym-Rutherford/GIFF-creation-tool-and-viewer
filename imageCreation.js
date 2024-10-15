@@ -1,4 +1,4 @@
-import { GiffSave } from "./giffSave.js";
+import { GiffSave } from "./GiffSave.js";
 import { GiffLoad } from "./GiffLoad.js";
 
 const canvasCreation = document.getElementById("createCanvas")
