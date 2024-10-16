@@ -6,9 +6,9 @@ export class GiffDecompress extends Giff{
         pixelData = this.removePadding(pixelData);
         let returnPixelData = [];
         for(let i = 0; i < pixelData.length; i += 5){
-            for(let j = 0; j < pixelData[i]; j++){
-                returnPixelData.push(pixelData[j + 1].toString().splice(1) + pixelData[j + 2].toString().splice(1) + pixelData[j + 3].toString().splice(1));
-            }
+            let constructedHex = pixelData[i+1].substring(0, 2) + pixelData[i+2].substring(0, 2) + pixelData[i+3].substring(0, 2) + pixelData[i+4].substring(0, 2);
+            let length = parseInt(this.convertToLittleEndian(pixelData[i]), 16);
+            returnPixelData.push(...Array(length).fill(constructedHex));
         }
 
         console.log(returnPixelData);
@@ -24,5 +24,10 @@ export class GiffDecompress extends Giff{
         }
 
         return splitData
+    }
+
+
+    convertToLittleEndian(hex){
+        return hex.match(/.{1,2}/g).reverse().join("");
     }
 }

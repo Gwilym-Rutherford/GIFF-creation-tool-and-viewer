@@ -29,7 +29,8 @@ export class GiffCompress extends Giff{
         let pixelData = new ArrayBuffer(RLEArr.length * 4);
         let pixelDataViewer = new Uint32Array(pixelData);
         pixelDataViewer.set(RLEArr);
-        
+
+
         return pixelData;
     }
 
