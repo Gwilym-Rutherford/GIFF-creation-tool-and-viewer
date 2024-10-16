@@ -11,8 +11,6 @@ export class GiffDecompress extends Giff{
             returnPixelData.push(...Array(length).fill(constructedHex));
         }
 
-        console.log(returnPixelData);
-
         return returnPixelData;
     }
 
